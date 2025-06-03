@@ -23,6 +23,33 @@ Dentro da biblioteca padrão do C++ temos a STL (Standard Template Library), que
 
 Como já vimos em **Algoritmos e estrutura de dados I** Os componentes não estão "ligados" ao programa automaticamente, eles fazem parte das bibliotecas externas da linguagem C++ e precisam ser explicitamente incluídos para que o compilador saiba que você quer usá-los.
 
+## Namespace
+Namespaces proporcionam uma forma de **evitar conflitos de nomes** em projetos grandes.
+
+Cada entidade (função, classe, variável) precisa de um nome único — ou então, um **espaço único** 😉.
+
+> O namespace permite que duas entidades com o mesmo nome existam, desde que estejam em namespaces diferentes.
+
+### STD
+
+O `std` é um namespace em C++. Ele é um escopo que agrupa todos os recursos da biblioteca padrão de C++ (como funções, classes, objetos, etc.).
+
+O `std` não é uma classe, nem um objeto, ele é simplesmente um namespace que serve principalmente para evitar conflitos de nomes e organizar as funcionalidades.
+
+É possível usar o `using namespace`, uma diretiva do C++ que permite acesso direto aos recursos de um determinado namespace, sem precisar escrever o nome completo do namespace antes de cada recurso. É como dizer ao compilador para usar o namespace `std` em todo o código a partir daquele ponto.
+
+```C++
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Aqui não é necessário o std::"
+    cout << "Olá, Mundo!";
+    return 0;
+}
+```
+
+
 # Entrada e saída de dados
 
 Dentro do `<iostream>`, estão definidos fluxos padrão que são usados para entrada e saída de dados. Esses fluxos são representados por objetos das classes `std::ostream` e `std::istream`.
