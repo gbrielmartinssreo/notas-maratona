@@ -301,3 +301,102 @@ std::cout << mat[1][2]; // imprime 6
 - ✅ Mais rápido
 - ✅ Cache friendly
 - ❌ Precisa calcular o índice manualmente
+
+
+---
+
+# Anexos
+
+## Funções array
+| Função / Membro       | O que faz                                                                                    |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| `at(i)`               | Acessa o elemento na posição `i` com verificação de limite (lança exceção se fora do índice) |
+| `operator[]`          | Acessa o elemento na posição `i` sem verificação de limite                                   |
+| `front()`             | Retorna o **primeiro** elemento                                                              |
+| `back()`              | Retorna o **último** elemento                                                                |
+| `data()`              | Retorna um ponteiro para o array subjacente (tipo `T*`)                                      |
+| `begin()` / `end()`   | Iteradores para início/fim                                                                   |
+| `rbegin()` / `rend()` | Iteradores reversos (de trás pra frente)                                                     |
+| `size()`              | Retorna o número de elementos (sempre o valor `N`)                                           |
+| `empty()`             | Retorna `true` se o array estiver vazio (`N == 0`)                                           |
+| `fill(value)`         | Preenche todos os elementos com o valor passado                                              |
+| `swap(other)`         | Troca o conteúdo com outro array                                                             |
+
+## Funções vector
+
+### 🎯 Acesso e informações
+
+| Função / Membro | O que faz                                                 |
+| --------------- | --------------------------------------------------------- |
+| `at(i)`         | Acessa o índice com verificação de limite (lança exceção) |
+| `operator[]`    | Acessa o índice sem verificação                           |
+| `front()`       | Retorna o primeiro elemento                               |
+| `back()`        | Retorna o último elemento                                 |
+| `data()`        | Retorna ponteiro pro array interno                        |
+| `size()`        | Número de elementos                                       |
+| `capacity()`    | Tamanho do espaço alocado (pode ser maior que `size()`)   |
+| `empty()`       | Retorna `true` se estiver vazio                           |
+
+---
+
+### ➕ Inserção
+
+| Função              | O que faz                                               |
+| ------------------- | ------------------------------------------------------- |
+| `push_back(val)`    | Adiciona elemento no final                              |
+| `insert(pos, val)`  | Insere antes da posição dada (`pos` = iterador)         |
+| `emplace_back(...)` | Cria o elemento no final (sem cópia)                    |
+| `emplace(pos, ...)` | Cria o elemento direto na posição                       |
+| `resize(n)`         | Altera o tamanho (pode preencher com zeros ou destruir) |
+| `assign(n, val)`    | Preenche com `n` cópias de `val`                        |
+
+---
+
+### ➖ Remoção
+
+| Função              | O que faz                                           |
+| ------------------- | --------------------------------------------------- |
+| `pop_back()`        | Remove o último elemento                            |
+| `erase(pos)`        | Remove o elemento em `pos`                          |
+| `erase(start, end)` | Remove intervalo                                    |
+| `clear()`           | Remove todos os elementos                           |
+| `shrink_to_fit()`   | Reduz `capacity` para `size` (libera memória extra) |
+
+---
+
+### 🔀 Outros
+
+| Função                | O que faz                                    |
+| --------------------- | -------------------------------------------- |
+| `swap(other)`         | Troca os dados com outro `vector`            |
+| `reserve(n)`          | Garante que a capacidade será pelo menos `n` |
+| `begin()` / `end()`   | Iteradores padrão                            |
+| `rbegin()` / `rend()` | Iteradores reversos                          |
+
+---
+
+### Exemplo prático de uso
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3};
+
+    vec.push_back(4);            // [1, 2, 3, 4]
+    vec.insert(vec.begin() + 1, 10); // [1, 10, 2, 3, 4]
+
+    std::cout << vec.front();    // 1
+    std::cout << vec.back();     // 4
+
+    vec.pop_back();              // [1, 10, 2, 3]
+    vec.erase(vec.begin() + 2);  // Remove o 2 → [1, 10, 3]
+
+    vec.resize(5);               // [1, 10, 3, 0, 0]
+    vec.shrink_to_fit();         // Tenta liberar memória extra
+
+    for (int x : vec)
+        std::cout << x << " ";   // Imprime tudo
+}
+```
